@@ -2,7 +2,7 @@
 // 导入接口函数
 import { LayoutCateGory } from '@/apis/layoutApi'
 // 导入生命周期函数onMounted、响应式数据ref
-import { onMounted,ref } from 'vue'
+import { onMounted, ref } from 'vue'
 // 生成一个空数组用来存储后台传来的数据
 const cateGoryList = ref([])
 // 新建一个函数调用接口函数
@@ -23,6 +23,7 @@ onMounted(() => {
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
+        <li class="home"><RouterLink to="/">首页</RouterLink></li>
         <li class="home" v-for="item in cateGoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
@@ -33,7 +34,7 @@ onMounted(() => {
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
-      
+
     </div>
   </header>
 </template>
@@ -66,24 +67,24 @@ onMounted(() => {
     padding-left: 40px;
     position: relative;
     z-index: 998;
-  
+
     li {
       margin-right: 40px;
       width: 38px;
       text-align: center;
-  
+
       a {
         font-size: 16px;
         line-height: 32px;
         height: 32px;
         display: inline-block;
-  
+
         &:hover {
           color: $xtxColor;
           border-bottom: 1px solid $xtxColor;
         }
       }
-  
+
       .active {
         color: $xtxColor;
         border-bottom: 1px solid $xtxColor;
