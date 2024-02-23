@@ -1,28 +1,15 @@
 <script setup>
 // 导入vueUse
 import { useScroll } from '@vueuse/core'
-// 导入接口函数
-import { LayoutCateGory } from '@/apis/layoutApi'
-// 导入生命周期函数onMounted、响应式数据ref
-import { onMounted, ref } from 'vue'
+import { useCategoryStore } from '@/stores/category';
 
 const { y } = useScroll(window)
-// 生成一个空数组用来存储后台传来的数据
-const cateGoryList = ref([])
-// 新建一个函数调用接口函数
-const getCategory = async () => {
-    const res = await LayoutCateGory()
-    console.log(res);
-    cateGoryList.value = res.result
-}
-onMounted(() => {
-    getCategory()
-}) 
+const categoryStore = useCategoryStore()
+
 </script>
 
 <template>
     <div class="app-header-sticky" :class="{ show:y>78}">
-        {{ y }}
         <div class="container">
             <RouterLink class="logo" to="/" />
             <!-- 导航区域 -->
@@ -30,7 +17,7 @@ onMounted(() => {
                 <li class="home">
                     <RouterLink to="/">首页</RouterLink>
                 </li>
-                <li class="home" v-for="item in cateGoryList" :key="item.id">
+                <li class="home" v-for="item in categoryStore.cateGoryList" :key="item.id">
                     <RouterLink to="/">{{ item.name }}</RouterLink>
                 </li>
             </ul>

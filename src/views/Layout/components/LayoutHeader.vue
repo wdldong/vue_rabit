@@ -1,19 +1,9 @@
 <script setup>
-// 导入接口函数
-import { LayoutCateGory } from '@/apis/layoutApi'
-// 导入生命周期函数onMounted、响应式数据ref
-import { onMounted, ref } from 'vue'
-// 生成一个空数组用来存储后台传来的数据
-const cateGoryList = ref([])
-// 新建一个函数调用接口函数
-const getCategory = async () => {
-  const res = await LayoutCateGory()
-  console.log(res);
-  cateGoryList.value = res.result
-}
-onMounted(() => {
-  getCategory()
-}) 
+import { useCategoryStore } from '@/stores/category';
+
+const categoryStore = useCategoryStore()
+
+
 </script>
 
 <template>
@@ -24,7 +14,7 @@ onMounted(() => {
       </h1>
       <ul class="app-header-nav">
         <li class="home"><RouterLink to="/">首页</RouterLink></li>
-        <li class="home" v-for="item in cateGoryList" :key="item.id">
+        <li class="home" v-for="item in categoryStore.cateGoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
 
