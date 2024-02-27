@@ -1,10 +1,9 @@
 <script setup>
 // 引入pinia中的数据
 import { useCategoryStore } from '@/stores/category';
-
 const categoryStore = useCategoryStore()
-
 console.log(categoryStore.cateGoryList);
+
 </script>
 
 <template>
@@ -44,7 +43,6 @@ console.log(categoryStore.cateGoryList);
   background: rgba(0, 0, 0, 0.8);
   position: relative;
   z-index: 99;
-
   .menu {
     li {
       padding-left: 40px;

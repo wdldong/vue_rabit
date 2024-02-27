@@ -4,12 +4,14 @@ import { useCategoryStore } from '@/stores/category';
 const categoryStore = useCategoryStore()
 
 
+
+
 </script>
 
 <template>
   <header class='app-header'>
     <div class="container">
-      <h1 class="logo">
+      <h1 class="logo" @click="changeShow">
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
