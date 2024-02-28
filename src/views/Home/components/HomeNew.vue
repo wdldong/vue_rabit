@@ -2,10 +2,11 @@
 import { ref,onMounted } from 'vue'
 import HomePanor from './HomePanor.vue';
 import { NewApi } from '@/apis/home'
+
 const newList = ref([])
 const getNewList = async () => {
   const res = await NewApi()
-  console.log(res);
+  // console.log(res);
   newList.value = res.result
 }
 onMounted(() => {

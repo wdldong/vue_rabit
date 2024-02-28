@@ -19,3 +19,10 @@ export function HotApi() {
         url: '/home/hot'
     })
 }
+
+// 产品分类列表
+export function ListApi() {
+    return httpInstance({
+        url: '/home/goods'
+    })
+}
