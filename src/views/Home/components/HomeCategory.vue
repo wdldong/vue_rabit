@@ -2,7 +2,7 @@
 // 引入pinia中的数据
 import { useCategoryStore } from '@/stores/category';
 const categoryStore = useCategoryStore()
-console.log(categoryStore.cateGoryList);
+// console.log(categoryStore.cateGoryList);
 
 </script>
 

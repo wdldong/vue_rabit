@@ -5,3 +5,17 @@ export function bannerApi() {
         url: '/home/banner'
     })
 }
+
+// 新鲜好物接口
+export function NewApi() {
+    return httpInstance({
+        url: '/home/new'
+    })
+}
+
+// 人气推荐接口
+export function HotApi() {
+    return httpInstance({
+        url: '/home/hot'
+    })
+}
