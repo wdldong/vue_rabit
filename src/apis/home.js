@@ -1,8 +1,14 @@
 // banner轮播图接口
 import httpInstance from '@/utils/http'
-export function bannerApi() {
+export function bannerApi(params = {}) {
+    // 默认为 1，一级分类为 2
+    // 解构赋值
+    const { distributionSite = '1' } = params
     return httpInstance({
-        url: '/home/banner'
+        url: '/home/banner',
+        params: {
+            distributionSite
+        }
     })
 }
 
