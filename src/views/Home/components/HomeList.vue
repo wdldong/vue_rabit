@@ -2,6 +2,7 @@
 import HomePanor from './HomePanor.vue'
 import { ListApi } from '@/apis/home'
 import { ref,onMounted } from 'vue'
+import GoodItems from './GoodItems.vue';
 
 const goodsProduct = ref([])
 const getProduct = async () => {
@@ -28,12 +29,7 @@ onMounted(() => {
         </RouterLink>
         <ul class="goods-list">
           <li v-for="good in cate.goods" :key="good.id">
-            <RouterLink to="/" class="goods-item">
-              <img v-img-lazy="good.picture" alt="" />
-              <p class="name ellipsis">{{ good.name }}</p>
-              <p class="desc ellipsis">{{ good.desc }}</p>
-              <p class="price">&yen;{{ good.price }}</p>
-            </RouterLink>
+              <GoodItems :good="good"></GoodItems>
           </li>
         </ul>
       </div>
