@@ -1,34 +1,12 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute,onBeforeRouteUpdate } from 'vue-router'
-import { CategoryApi } from '@/apis/category'
-const CategoryData = ref({})
-const route = useRoute()
-const getCategory = async (id = route.params.id) => {
-  const res = await CategoryApi(id)
-  CategoryData.value = res.result
-  // console.log(res);
-}
-onMounted(() => getCategory())
-onBeforeRouteUpdate((to) => {
-  // console.log(to.params.id);
-  getCategory(to.params.id)
-})
+import GoodItems from '../Home/components/GoodItems.vue';
+import { useBanner } from './composables/useBanner'
+import { useCategory } from './composables/useCategory'
 
 // 轮播图业务
-import { bannerApi } from '@/apis/home'
-import GoodItems from '../Home/components/GoodItems.vue';
-const bannerList = ref([])
-const getBanner = async () => {
-  const res = await bannerApi()
-  // console.log(res);
-  bannerList.value = res.result
-}
-onMounted(() => {
-  getBanner()
-})
-// 轮播图业务结束
-
+const { bannerList } = useBanner()
+// 分类列表逻辑
+const { CategoryData } = useCategory()
 
 
 </script>
