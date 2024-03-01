@@ -1,15 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,onBeforeRouteUpdate } from 'vue-router'
 import { CategoryApi } from '@/apis/category'
 const CategoryData = ref({})
 const route = useRoute()
-const getCategory = async () => {
-  const res = await CategoryApi(route.params.id)
+const getCategory = async (id = route.params.id) => {
+  const res = await CategoryApi(id)
   CategoryData.value = res.result
   // console.log(res);
 }
 onMounted(() => getCategory())
+onBeforeRouteUpdate((to) => {
+  // console.log(to.params.id);
+  getCategory(to.params.id)
+})
 
 // 轮播图业务
 import { bannerApi } from '@/apis/home'
@@ -25,8 +29,9 @@ onMounted(() => {
 })
 // 轮播图业务结束
 
-</script>
 
+
+</script>
 <template>
   <div class="top-category">
     <div class="container m-top-20">
