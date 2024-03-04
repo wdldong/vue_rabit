@@ -1,8 +1,10 @@
 <script setup>
-import { SubCategoryApi } from '@/apis/category'
+import { SubCategoryApi,CategoryListApi } from '@/apis/category'
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import GoodItems from '../Home/components/GoodItems.vue';
 
+// 面包屑导航二级分类
 const subCategoryData = ref({})
 const route = useRoute()
 const getSubCategory = async () => {
@@ -10,8 +12,25 @@ const getSubCategory = async () => {
   // console.log(res);
   subCategoryData.value = res.result
 }
+
+// 二级商品列表
+const CategoryList = ref()
+const reqData = ref({
+  categoryId: route.params.id,
+  page:1,
+  pageSize:20,
+  sortField: 'publishTime'
+})
+const getCategoryList = async () => {
+  const res = await CategoryListApi(reqData.value)
+  console.log(res);
+  CategoryList.value = res.result.items
+
+}
+
 onMounted(() => {
-  getSubCategory()
+  getSubCategory(),
+  getCategoryList()
 })
 
 </script>
@@ -35,6 +54,7 @@ onMounted(() => {
       </el-tabs>
       <div class="body">
          <!-- 商品列表-->
+         <GoodItems v-for="goods in CategoryList" :key="goods.id" :good="goods" />
       </div>
     </div>
   </div>

@@ -18,3 +18,12 @@ export function SubCategoryApi(id) {
         }
     })
 }
+
+// 商品列表接口
+export function CategoryListApi(data) {
+    return httpInstance({
+        url: '/category/goods/temporary',
+        method: 'post',
+        data
+    })
+}
