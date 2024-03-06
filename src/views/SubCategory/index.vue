@@ -33,6 +33,21 @@ const changeReqdata = () => {
   console.log(reqData.value.sortField);
   getCategoryList()
 }
+const disabled = ref(false)
+// 配置无限滚动
+const load = async () => {
+  console.log('页面滚动了');
+  // 滚动的请求
+  reqData.value.page++
+  const res = await CategoryListApi(reqData.value)
+  // 拼接数组的方法：1、es5的concat方法；2、展开运算符
+  CategoryList.value = [...CategoryList.value,...res.result.items]
+  // es5的concat方法
+  // CategoryList.value = CategoryList.value.concat(res.result.items)
+  if(res.result.items.length === 0) {
+    disabled.value = true
+  }
+}
 
 onMounted(() => {
   getSubCategory(),
@@ -58,7 +73,7 @@ onMounted(() => {
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
          <!-- 商品列表-->
          <GoodItems v-for="goods in CategoryList" :key="goods.id" :good="goods" />
       </div>
