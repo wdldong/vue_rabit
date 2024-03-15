@@ -1,10 +1,14 @@
 <script setup>
+import { LoginApi } from '@/apis/user';
 import { ref } from 'vue';
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
+import { useRouter } from 'vue-router';
 
 // 1.准备表单对象
 const form = ref({
-  account: '',
-  password: '',
+  account: 'xiaotuxian001',
+  password: '123456',
   aggre: true
 })
 
@@ -33,10 +37,20 @@ const rules = {
 }
 // 3、获取form实例对象
 const formRef = ref(null)
+const router = useRouter()
 // console.log(formRef.value);
 const doLogin = () => {
-  formRef.value.validate((valid) => {
+const {account,password} = form.value
+  formRef.value.validate( async (valid) => {
     console.log(valid);
+    if(valid) {
+      const res = await LoginApi({account,password})
+      console.log(res);
+      // 1、提示用户
+      ElMessage({type: 'success',message: '登陆成功'})
+      // 2、跳转首页
+      router.replace('/')
+    }
   })
 }
 
