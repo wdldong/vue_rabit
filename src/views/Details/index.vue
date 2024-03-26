@@ -3,6 +3,9 @@ import {getDetail} from '@/apis/detail'
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import DetailHot from './components/DetailHot.vue';
+import { ElMessage } from 'element-plus';
+import { useCatStore } from '@/stores/catstore';
+const CatStore = useCatStore()
 // import ImageView from '@/components/ImageView/index.vue'
 // import XtxSku from '@/components/XtxSku/index.vue'
 
@@ -17,8 +20,32 @@ onMounted(() => {
   getGoods()
 })
 // sku组件的事件
+let skuObj = {}
 const skuChange = (sku) => {
   console.log(sku);
+  skuObj = sku
+}
+// 加入购物车事件
+const count = ref(1)
+const catChange = (count) => {
+  console.log(count);
+}
+const addCat = () => {
+  if(skuObj.skuId) {
+    console.log('加入购物车成功');
+    CatStore.addCat({
+      id: goods.value.id, // 商品id
+      name: goods.value.name,
+      picture: goods.value.mainPictures[0],
+      count: count.value,
+      skuId: skuObj.skuId,
+      attrsTest: skuObj.specsTest,  // 商品规格
+      selected: true  // 商品是否选中
+    })
+  }else {
+    ElMessage.warning('请选择规格')
+    // console.log();
+  }
 }
 
 </script>
@@ -93,10 +120,10 @@ const skuChange = (sku) => {
               <!-- sku组件 -->
               <XtxSku :goods="goods" @change="skuChange"/>
               <!-- 数据组件 -->
-
+              <el-input-number v-model="count"  @change="catChange" />
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn">
+                <el-button size="large" class="btn" @click="addCat">
                   加入购物车
                 </el-button>
               </div>
