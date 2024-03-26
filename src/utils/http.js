@@ -3,6 +3,7 @@ import axios from "axios"
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from "@/stores/user"
+import router from "@/router"
 // 封装axios
 const httpInstance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -25,6 +26,15 @@ httpInstance.interceptors.response.use(res => res.data, e => {
     // console.log(e);
     // 对请求失败做统一报错提示
     ElMessage({type: 'warning',message: e.response.data.message})
+    // 对状态码401的处理
+    if(e.response.status === 401) {
+    // 清除用户token
+    const userStore = useUserStore()
+    userStore.clearUserInfo()
+    // 跳转到登录页
+    router.push('/login')
+    }
+
     return Promise.reject(e)
 })
 
