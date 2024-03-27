@@ -18,6 +18,7 @@ export const useCatStore = defineStore('catestore', () => {
             // 没有找到数据
             catStoreList.value.push(goods)
         }
+        // console.log(catStoreList.value);
     }
     // 删除购物车逻辑
     const delCart = (skuId) => {

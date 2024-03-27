@@ -37,6 +37,7 @@ const addCat = () => {
       id: goods.value.id, // 商品id
       name: goods.value.name,
       picture: goods.value.mainPictures[0],
+      price: goods.value.price,// 商品价格
       count: count.value,
       skuId: skuObj.skuId,
       attrsTest: skuObj.specsTest,  // 商品规格
