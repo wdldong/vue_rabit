@@ -32,7 +32,7 @@ const catChange = (count) => {
 }
 const addCat = () => {
   if(skuObj.skuId) {
-    console.log('加入购物车成功');
+    ElMessage.success('加入购物车成功')
     CatStore.addCat({
       id: goods.value.id, // 商品id
       name: goods.value.name,

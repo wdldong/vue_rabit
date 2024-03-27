@@ -4,10 +4,15 @@ const catStore = useCatStore()
 // console.log(catStore.catStoreList);
 
 // 单选框的回调函数
-const selectChange = (i,selected) => {
-    console.log(i,selected);
+const selectChange = (i, selected) => {
+    // console.log(i, selected);
     // 除了selected补充一个用来筛选的参数-skuId
-    catStore.singleCheck(i.skuId,selected)
+    catStore.singleCheck(i.skuId, selected)
+}
+
+// 全选框的回调函数
+const allCheck = (selected) => {
+    catStore.allCheck(selected)
 }
 
 </script>
@@ -20,7 +25,7 @@ const selectChange = (i,selected) => {
                     <thead>
                         <tr>
                             <th width="120">
-                                <el-checkbox />
+                                <el-checkbox :model-value="catStore.isAll" @change="allCheck"/>
                             </th>
                             <th width="400">商品信息</th>
                             <th width="220">单价</th>
@@ -34,7 +39,8 @@ const selectChange = (i,selected) => {
                         <tr v-for="i in catStore.catStoreList" :key="i.id">
                             <td>
                                 <!-- 单选框 -->
-                                <el-checkbox :model-value="i.selected" @change="(selected)=>selectChange(i,selected)"/>
+                                <el-checkbox :model-value="i.selected"
+                                    @change="(selected) => selectChange(i, selected)" />
                             </td>
                             <td>
                                 <div class="goods">
