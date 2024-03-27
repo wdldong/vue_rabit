@@ -1,7 +1,15 @@
 <script setup>
 import { useCatStore } from '@/stores/catstore'
 const catStore = useCatStore()
-console.log(catStore.catStoreList);
+// console.log(catStore.catStoreList);
+
+// 单选框的回调函数
+const selectChange = (i,selected) => {
+    console.log(i,selected);
+    // 除了selected补充一个用来筛选的参数-skuId
+    catStore.singleCheck(i.skuId,selected)
+}
+
 </script>
 
 <template>
@@ -25,7 +33,8 @@ console.log(catStore.catStoreList);
                     <tbody>
                         <tr v-for="i in catStore.catStoreList" :key="i.id">
                             <td>
-                                <el-checkbox />
+                                <!-- 单选框 -->
+                                <el-checkbox :model-value="i.selected" @change="(selected)=>selectChange(i,selected)"/>
                             </td>
                             <td>
                                 <div class="goods">

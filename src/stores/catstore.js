@@ -30,13 +30,22 @@ export const useCatStore = defineStore('catestore', () => {
     }
     // 计算属性
     // 计算购物车数量总和
-    computed(() => catStoreList.value.reduce((a, c) => a + c.count, 0))
+    const allCount = computed(() => catStoreList.value.reduce((a, c) => a + c.count, 0))
     // 计算购物车价格总和
-    computed(() => catStoreList.value.reduce((a, c) => a + c.count * c.price, 0))
+    const allPrice = computed(() => catStoreList.value.reduce((a, c) => a + c.count * c.price, 0))
+    // 购物车列表的单选功能
+    const singleCheck = (skuId,selected) => {
+        // 通过skuId找到需要修改的那一项，然后把它的selected修改为传过来的selected
+        const item = catStoreList.value.find((item) => item.skuId === skuId)
+        item.selected = selected
+    }
     return {
         catStoreList,
+        allCount,
+        allPrice,
         addCat,
-        delCart
+        delCart,
+        singleCheck
     }
 }, {
     // 开启持久化，页面刷新不丢失数据
