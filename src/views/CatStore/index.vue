@@ -1,7 +1,7 @@
 <script setup>
 import { useCatStore } from '@/stores/catstore';
 const catStore = useCatStore()
-console.log(catStore.catStoreList);
+// console.log(catStore.catStoreList);
 
 </script>
 
