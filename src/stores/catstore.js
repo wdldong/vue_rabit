@@ -47,12 +47,17 @@ export const useCatStore = defineStore('catestore', () => {
     const allPrice = computed(() => catStoreList.value.reduce((a, c) => a + c.count * c.price, 0))
     // 是否全选
     const isAll = computed(() => catStoreList.value.every((item) => item.selected))
-
+    // 购物车列表商品数量计算
+    const selectedNum = computed(() => catStoreList.value.filter(item => item.selected).reduce((a, c) => a + c.count, 0))
+    // 购物车列表商品价格总和计算
+    const selectedPrice = computed(() => catStoreList.value.filter(item => item.selected).reduce((a, c) => a + c.count * c.price, 0))
     return {
         catStoreList,
         allCount,
         allPrice,
         isAll,
+        selectedNum,
+        selectedPrice,
         addCat,
         delCart,
         singleCheck,

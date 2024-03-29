@@ -56,7 +56,7 @@ const allCheck = (selected) => {
                                 <p>&yen;{{ i.price }}</p>
                             </td>
                             <td class="tc">
-                                <el-input-number v-model="i.count" />
+                                <el-input-number v-model="i.count" :min="1"/>
                             </td>
                             <td class="tc">
                                 <p class="f16 red">&yen;{{ (i.price * i.count).toFixed(2) }}</p>
@@ -88,8 +88,8 @@ const allCheck = (selected) => {
             <!-- 操作栏 -->
             <div class="action">
                 <div class="batch">
-                    共 10 件商品，已选择 2 件，商品合计：
-                    <span class="red">¥ 200.00 </span>
+                    共 {{ catStore.allCount }} 件商品，已选择 {{ catStore.selectedNum }} 件，商品合计：
+                    <span class="red">¥ {{ catStore.selectedPrice.toFixed(2) }} </span>
                 </div>
                 <div class="total">
                     <el-button size="large" type="primary">下单结算</el-button>
