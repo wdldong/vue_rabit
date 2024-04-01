@@ -1,11 +1,25 @@
 // 头部购物车数据
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
+import { useUserStore } from '@/stores/user'
+import { innerCartApi, getCartListApi } from "@/apis/cart";
+
 export const useCatStore = defineStore('catestore', () => {
     const catStoreList = ref([])
     // 添加购物车逻辑
-    const addCat = (goods) => {
+    const userStore = useUserStore()
+    const isLogin = computed(() => userStore.userInfo.token)
+    const addCat = async (goods) => {
+        const { skuId, count } = goods
+        if (isLogin.value) {
+            // 用户登录之后的购物车逻辑
+            await innerCartApi({ skuId, count })
+            // 添加购物车后更新列表
+            const res = await getCartListApi()
+            // console.log(res);
+            catStoreList.value = res.result
 
+        }
         // 已经添加过： count+1
         // 没有添加过： push方法
         // 思路：通过匹配传递过来的商品对象中的skuId能不能在catStoreList中找到，找到了就是添加过

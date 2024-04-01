@@ -22,7 +22,7 @@ onMounted(() => {
 // sku组件的事件
 let skuObj = {}
 const skuChange = (sku) => {
-  console.log(sku);
+  // console.log(sku);
   skuObj = sku
 }
 // 加入购物车事件
