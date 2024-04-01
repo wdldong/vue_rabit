@@ -19,20 +19,22 @@ export const useCatStore = defineStore('catestore', () => {
             // console.log(res);
             catStoreList.value = res.result
 
-        }
-        // 已经添加过： count+1
-        // 没有添加过： push方法
-        // 思路：通过匹配传递过来的商品对象中的skuId能不能在catStoreList中找到，找到了就是添加过
-        const item = catStoreList.value.find((item) => goods.skuId === item.skuId)
-        if (item) {
-            // 找到了有的数据
-            // count++
-            item.count++
         } else {
-            // 没有找到数据
-            catStoreList.value.push(goods)
+            // 已经添加过： count+1
+            // 没有添加过： push方法
+            // 思路：通过匹配传递过来的商品对象中的skuId能不能在catStoreList中找到，找到了就是添加过
+            const item = catStoreList.value.find((item) => goods.skuId === item.skuId)
+            if (item) {
+                // 找到了有的数据
+                // count++
+                item.count++
+            } else {
+                // 没有找到数据
+                catStoreList.value.push(goods)
+            }
+            // console.log(catStoreList.value);
         }
-        // console.log(catStoreList.value);
+
     }
     // 删除购物车逻辑
     const delCart = (skuId) => {
