@@ -6,11 +6,11 @@ import { innerCartApi, getCartListApi, delCartListApi } from "@/apis/cart";
 
 export const useCatStore = defineStore('catestore', () => {
     const catStoreList = ref([])
-    // const updateCart = () => {
-    //     // 添加购物车后更新列表
-    //     const res =  getCartListApi()
-    //     catStoreList.value = res.result
-    // }
+    // 添加购物车后更新列表
+    const updateCart = async () => {
+        const res = await getCartListApi()
+        catStoreList.value = res.result
+    }
     const userStore = useUserStore()
     const isLogin = computed(() => userStore.userInfo.token)
     // 添加购物车逻辑
@@ -20,8 +20,7 @@ export const useCatStore = defineStore('catestore', () => {
             // 用户登录之后的购物车逻辑
             await innerCartApi({ skuId, count })
             // 添加购物车后更新列表
-            const res = await getCartListApi()
-            catStoreList.value = res.result
+            updateCart()
 
         } else {
             // 已经添加过： count+1
@@ -44,8 +43,7 @@ export const useCatStore = defineStore('catestore', () => {
     const delCart = async (skuId) => {
         if (isLogin.value) {
             await delCartListApi([skuId])
-            const res = await getCartListApi()
-            catStoreList.value = res.result
+            updateCart()
         } else {
             // 思路
             // 1、找到要删除项的下标值(findIndex) -- splice
@@ -53,6 +51,10 @@ export const useCatStore = defineStore('catestore', () => {
             // 2、使用数组的过滤方法 -- filter
             catStoreList.value.splice(idx, 1)
         }
+    }
+    // 退出登录清空购物车列表
+    const clearCart = () => {
+        catStoreList.value = []
     }
     // 单选框的功能
     const singleCheck = (skuId, selected) => {
@@ -84,6 +86,7 @@ export const useCatStore = defineStore('catestore', () => {
         isAll,
         selectedNum,
         selectedPrice,
+        clearCart,
         addCat,
         delCart,
         singleCheck,
