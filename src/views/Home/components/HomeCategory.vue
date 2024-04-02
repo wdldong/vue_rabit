@@ -1,6 +1,6 @@
 <script setup>
 // 引入pinia中的数据
-import { useCategoryStore } from '@/stores/category';
+import { useCategoryStore } from '@/stores/categoryStore';
 const categoryStore = useCategoryStore()
 // console.log(categoryStore.cateGoryList);
 
@@ -153,4 +153,4 @@ const categoryStore = useCategoryStore()
     }
   }
 }
-</style>
+</style>@/stores/categoryStore

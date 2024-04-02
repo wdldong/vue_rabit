@@ -17,3 +17,12 @@ export const getCartListApi = () => {
         method: 'GET',
     })
 }
+
+// 删除购物车列表接口
+export const delCartListApi = (ids) => {
+    return httpInstance({
+        url: '/member/cart',
+        method: 'DELETE',
+        data: {ids}
+    })
+}

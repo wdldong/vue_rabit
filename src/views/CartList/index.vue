@@ -1,5 +1,5 @@
 <script setup>
-import { useCatStore } from '@/stores/catstore'
+import { useCatStore } from '@/stores/cartStore'
 const catStore = useCatStore()
 // console.log(catStore.catStoreList);
 
@@ -224,4 +224,4 @@ const allCheck = (selected) => {
     }
 
 }
-</style>
+</style>@/stores/cartStore

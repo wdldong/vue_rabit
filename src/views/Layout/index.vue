@@ -5,7 +5,7 @@ import LayoutFooter from './components/LayoutFooter.vue'
 import LayoutFixed from '@/views/Layout/components/LayoutFixed.vue'
 import {onMounted} from 'vue'
 // 导入pinia中的方法
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from '@/stores/categoryStore'
 const categoryStore = useCategoryStore()
 onMounted(() => {
   categoryStore.getCategory()
@@ -21,4 +21,4 @@ onMounted(() => {
   <!-- <RouterView :key="$route.fullPath" /> -->
   <RouterView />
   <LayoutFooter />
-</template>
+</template>@/stores/categoryStore

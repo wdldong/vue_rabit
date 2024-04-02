@@ -1,5 +1,5 @@
 <script setup>
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router';
 const router = useRouter()
 const userStore = useUserStore()
@@ -81,4 +81,4 @@ const cancelEvent = () => {
     }
   }
 }
-</style>
+</style>@/stores/userStore

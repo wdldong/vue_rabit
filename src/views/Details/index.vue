@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import DetailHot from './components/DetailHot.vue';
 import { ElMessage } from 'element-plus';
-import { useCatStore } from '@/stores/catstore';
+import { useCatStore } from '@/stores/cartStore';
 const CatStore = useCatStore()
 // import ImageView from '@/components/ImageView/index.vue'
 // import XtxSku from '@/components/XtxSku/index.vue'
@@ -404,4 +404,4 @@ const addCat = () => {
 .bread-container {
   padding: 25px 0;
 }
-</style>
+</style>@/stores/cartStore
