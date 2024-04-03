@@ -86,6 +86,7 @@ export const useCatStore = defineStore('catestore', () => {
         isAll,
         selectedNum,
         selectedPrice,
+        updateCart,
         clearCart,
         addCat,
         delCart,

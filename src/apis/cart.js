@@ -26,3 +26,11 @@ export const delCartListApi = (ids) => {
         data: {ids}
     })
 }
+// 合并购物车列表接口
+export const mergeCartApi = (data) => {
+    return httpInstance({
+        url: '/member/cart/merge',
+        method: 'POST',
+        data
+    })
+}
